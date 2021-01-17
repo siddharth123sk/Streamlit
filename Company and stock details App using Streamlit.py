@@ -54,9 +54,6 @@ st.image('./header.png')
 #introduction of the app
 st.write("""
 ## Simple Stock Info App
-
-Shown are the company and stocks details!
-
 """)
 
 #drop down menu to select different companies, currently it supports the top 11 companies which are being viewed the most on Yahoo Finance
@@ -86,55 +83,58 @@ if (company == 'BANK OF AMERICA CORPORATION'):
 if (company == 'NETFLIX'):
     option = 'NFLX'
 
-#printing the user selected company name
-st.write('Showing data for ', company)
+if st.button('Show Data'):
 
-#st.write('Please wait...Retrieving data now...')
 
-#assigning the user input to the tickerSymbol variable
-tickerSymbol = option
+    #printing the user selected company name
+    st.write('Showing data for ', company)
 
-#getting the ticker data
-tickerData = yf.Ticker(tickerSymbol)
+    #st.write('Please wait...Retrieving data now...')
 
-#creating a variable called end to store current data
-end = datetime.today().strftime('%Y-%m-%d')
-#print(end)
+    #assigning the user input to the tickerSymbol variable
+    tickerSymbol = option
 
-#getting the date range for stock data, it is 31st May 2010 to the present data
-tickerDf = tickerData.history(period='1d', start='2010-5-31', end=end)
+    #getting the ticker data
+    tickerData = yf.Ticker(tickerSymbol)
 
-#printing data
-st.write(tickerData.info)
-st.line_chart(tickerData.history(period= "max"))
-st.write(tickerData.actions)
-st.write(tickerData.splits)
+    #creating a variable called end to store current data
+    end = datetime.today().strftime('%Y-%m-%d')
+    #print(end)
 
-st.write(tickerData.major_holders)
-#making the download CSV button
-df = tickerData.major_holders
-st.markdown(get_table_download_link_major_holders(df), unsafe_allow_html=True)
+    #getting the date range for stock data, it is 31st May 2010 to the present data
+    tickerDf = tickerData.history(period='1d', start='2010-5-31', end=end)
 
-st.write(tickerData.institutional_holders)
-#making the download CSV button
-df = tickerData.institutional_holders
-st.markdown(get_table_download_link_institutional_holders(df), unsafe_allow_html=True)
+    #printing data
+    st.write(tickerData.info)
+    st.line_chart(tickerData.history(period= "max"))
+    st.write(tickerData.actions)
+    st.write(tickerData.splits)
 
-st.write(tickerData.sustainability)
+    st.write(tickerData.major_holders)
+    #making the download CSV button
+    df = tickerData.major_holders
+    st.markdown(get_table_download_link_major_holders(df), unsafe_allow_html=True)
 
-st.write(tickerData.recommendations)
-#making the download CSV button
-df = tickerData.recommendations
-st.markdown(get_table_download_link_recommendations(df), unsafe_allow_html=True)
+    st.write(tickerData.institutional_holders)
+    #making the download CSV button
+    df = tickerData.institutional_holders
+    st.markdown(get_table_download_link_institutional_holders(df), unsafe_allow_html=True)
 
-st.write(tickerData.calendar)
-st.write(tickerData.isin)
-st.write(tickerData.options)
+    st.write(tickerData.sustainability)
 
-st.line_chart(tickerDf.Open)
-st.line_chart(tickerDf.Close)
-st.line_chart(tickerDf.Volume)
-st.line_chart(tickerDf.High)
+    st.write(tickerData.recommendations)
+    #making the download CSV button
+    df = tickerData.recommendations
+    st.markdown(get_table_download_link_recommendations(df), unsafe_allow_html=True)
+
+    st.write(tickerData.calendar)
+    st.write(tickerData.isin)
+    st.write(tickerData.options)
+
+    st.line_chart(tickerDf.Open)
+    st.line_chart(tickerDf.Close)
+    st.line_chart(tickerDf.Volume)
+    st.line_chart(tickerDf.High)
 
 st.write('\n')
 st.write('\n')
