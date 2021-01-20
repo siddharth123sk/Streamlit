@@ -7,3 +7,5 @@ seaborn
 streamlit
 watchdog
 yfinance
+matplotlib
+
