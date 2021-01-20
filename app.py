@@ -53,7 +53,7 @@ st.image('./header.png')
 
 #introduction of the app
 st.write("""
-## Simple Stock Info App
+## Easy Stock Info App
 """)
 
 #drop down menu to select different companies, currently it supports the top 11 companies which are being viewed the most on Yahoo Finance
